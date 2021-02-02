@@ -5,13 +5,25 @@ from p_library.models import Book
 # Create your views here.
 from django.http import HttpResponse
 from django.template import loader
-from p_library.models import Book, Author
+from p_library.models import Book, Author, Publisher
 from django.shortcuts import redirect
+
+# Вывод таблицы Книга-Издательство
+def publishers(request):
+    template = loader.get_template('publishers.html')
+    publishers = Publisher.objects.all()
+    books = Book.objects.all()
+    publishers_data = {
+        'publishers': publishers,
+        'books': books
+    }
+    return HttpResponse(template.render(publishers_data, request))
 
 
 def books_list(request):
     books = Book.objects.all()
     return HttpResponse(books)
+
 
 def index(request):
     template = loader.get_template('index.html')
@@ -21,6 +33,7 @@ def index(request):
         "books": books,
     }
     return HttpResponse(template.render(biblio_data, request))
+
 
 def book_increment(request):
     if request.method == 'POST':
