@@ -16,5 +16,6 @@ class BookAdmin(admin.ModelAdmin):
 class AuthorAdmin(admin.ModelAdmin):
     pass
 
-# @admin.register(Publisher)
-# class PublisherAdmin(admin.ModelAdmin)
+@admin.register(Publisher)
+class PublisherAdmin(admin.ModelAdmin):
+    pass
